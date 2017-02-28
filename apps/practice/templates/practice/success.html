@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Belt Practice</title>
+    {% load staticfiles %}
+    <link href="{% static 'css/practice.css' %}" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <header><h1>Hi {{loggeduser.name}}!</h1></header>
+    {% if messages %}
+    <ul>
+      {% for message in messages %}
+      <li class="{{ message.tags }}"> <h4>{{ message }}</h4></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    <br>
+    <div class="scheduled_trips">
+    <h2 class="sched_head">Your Scheduled Trips</h2>
+      <table>
+        <tr>
+          <th>Destination</th>
+          <th>Leave</th>
+          <th>Return</th>
+          <th>Plan</th>
+        </tr>
+        {% for trip in trips %}
+        <tr>
+          <td>
+            <form action='/description/{{trip.id}}' method='POST'>
+            {% csrf_token %}
+              <button class="tripinfo">{{trip.destination}}</button>
+            </form>
+          </td>
+          <td>{{trip.start}}</td>
+          <td>{{trip.end}}</td>
+          <td>{{trip.description}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+    <div class="other_trips">
+    <h2>Other User's Travel Plans</h2>
+      <table>
+        <tr>
+          <th>Planned By</th>
+          <th>Destination</th>
+          <th>Leave</th>
+          <th>Return</th>
+          <th>Join?</th>
+        </tr>
+        {% for trip in othertrips %}
+        <tr>
+          <td>{{trip.creator.name}}</td>
+          <td>
+            <form action='/description/{{trip.id}}' method='POST'>
+            {% csrf_token %}
+              <button class="tripinfo">{{trip.destination}}</button>
+            </form>
+          </td>
+          <td>{{trip.start}}</td>
+          <td>{{trip.end}}</td>
+          <td>
+            <form action="/join/{{trip.id}}" method="POST">
+              {% csrf_token %}
+              <button>Join!</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+    <form action="/addplan">
+      {% csrf_token %}
+      <button>Add travel plan!</button>
+    </form>
+    <form action="/logout">
+      {% csrf_token %}
+      <button id="log_out">Log Out</button>
+    </form>
+  </body>
+</html>
+
+
+{% comment %}{% for s in secrets %}
+  {{s.description}}
+  
+  {% if s.creator == user %}
+  
+  <a href="/like/{{s.id}}"></a>
+  {% else %}
+  <a href="/like/{{s.id}}"></a>
+  
+{% endif %}{% endcomment %}
+
+
+
+{% comment %}class travel (models.Model)
+destination = models.CharField
+description = models.CharField
+join = models.ManyToManyField(User.related_name=joiner)
+
+for travel in travels
+if the user created this travelerstravel.destination
+endif
+look at who joined the travelif the user is part of the join group
+travel.destination
+
+
+if travelers
+for travel in travelers
+if travel.creator.id == user.id
+for everyuser in travel.join.all
+if everyuser.id ==user.id{% endcomment %}

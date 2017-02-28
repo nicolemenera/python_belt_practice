@@ -1,0 +1,84 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  outline: none;
+}
+
+body {
+  padding: 80px;
+}
+
+header {
+  color: dimgrey;
+  height: 85px; 
+}
+
+h1 {
+  text-align: center;
+  font-size: 40px;
+}
+
+h3 {
+  margin: 20px;
+}
+
+h2 {
+  border-bottom: 1px solid black;
+}
+
+p {
+  font-size: 9px;
+}
+
+form {
+  margin: 20px;
+  line-height: 20px;
+  font-size: 16px;
+}
+
+table, th {
+
+}
+
+.scheduled_trips {
+ padding: 20px;
+ max-width: 550px;
+ margin: 0, 
+}
+
+.other_trips {
+ padding: 20px;
+ max-width: 550px;
+}
+
+button {
+  font-size: 14px;
+  padding: 8px;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  background-color: dimgrey;
+  cursor: pointer;
+  cursor: hand;
+}
+
+
+.log_out {
+  display: inline;
+  width: 70px;
+}
+
+ul {
+  list-style-type: none;
+  text-align: center;
+  color: red;
+}
+
+.tripinfo {
+  color: mediumblue;
+  background-color: white;
+  margin: 0;
+  padding: 0;
+
+

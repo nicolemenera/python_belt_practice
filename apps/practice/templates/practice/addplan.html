@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Belt Practice</title>
+    {% load staticfiles %}
+    <link href="{% static 'css/practice.css' %}" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <h1>Add A Trip!</h1>
+    {% if messages %}
+    <ul>
+      {% for message in messages %}
+      <li class="{{ message.tags }}"> <h4>{{ message }}</h4></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="trip_form">
+      <form action="/settrip" method="POST" class="add_plan">
+      {% csrf_token %}
+        <label>Destination:</label>
+        <input type="text" name="destination"><br>
+        <label>Description:</label>
+        <input type="text" name="description"><br>
+        <label>Travel Date From:</label>
+        <input type="date" name="date_from"><br>
+        <label>Travel Date To:</label>
+        <input type="date" name="date_to"><br>
+        <button>Add</button>
+      </form>
+    </div>
+    <div class="trip_buttons">
+      <form action="/success">
+        {% csrf_token %}
+        <button class="home">Home</button>
+      </form>
+      <form action="/logout">
+        {% csrf_token %}
+        <button class="logout">Log Out</button>
+      </form>
+    </div>
+  </body>
+</html>

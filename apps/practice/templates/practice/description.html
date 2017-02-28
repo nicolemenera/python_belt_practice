@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Belt Practice</title>
+    {% load staticfiles %}
+    <link href="{% static 'css/practice.css' %}" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <h1>Description</h1>
+    <h2>{{trip.destination}}</h2>
+    <table>
+      <tr><td><b>Planned By:</b>{{trip.creator.name}}</td></tr>
+      <tr><td><b>Description:</b>{{trip.description}}</td></tr>
+      <tr><td><b>Start Date:</b>{{trip.start}}</td></tr>
+      <tr><td><b>Return Date:</b>{{trip.end}}</td></tr>
+    </table>
+    <br>
+    <h2>Other Users Joining Trip</h2>
+    {% for joiner in joiners %}
+    <table>
+      <tr><td>{{joiner.name}}</td></tr>
+    </table>
+    {% endfor %}
+    <form action="/success">
+        {% csrf_token %}
+        <button class="home">Home</button>
+      </form>
+    <form action="/logout">
+      {% csrf_token %}
+      <button>Log Out</button>
+    </form>
+  </body>
+</html>
+
+{% comment %}{% for s in secrets %}
+  {{s.description}}
+  
+  {% if s.creator == user %}
+  
+  <a href="/like/{{s.id}}"></a>
+  {% else %}
+  <a href="/like/{{s.id}}"></a>
+  
+{% endif %}{% endcomment %}
